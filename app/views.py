@@ -14,9 +14,9 @@ from flask import (
     url_for,
 )
 
-from app import app, db
 from config import TOKEN
 from forms import GetCsv, QueryForm
+from main import app, db
 from models import (
     Attachment,
     Domain,

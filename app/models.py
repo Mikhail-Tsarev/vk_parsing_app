@@ -1,6 +1,6 @@
 import sqlalchemy
 
-from app import db
+from main import db
 
 
 class Post(db.Model):
@@ -71,7 +71,12 @@ def save_attachments_in_db(data):
                 attachment_id = attachment[attachment["type"]]["id"]
                 url = f'https://vk.com/{attachment["type"]}{attachment[attachment["type"]]["owner_id"]}_{attachment_id}'
 
-            if attachment["type"] in ("link", "app", "pretty_cards", "event"):
+            if attachment["type"] in (
+                "link",
+                "app",
+                "pretty_cards",
+                "event",
+            ):
                 owner_id = ""
             else:
                 owner_id = attachment[attachment["type"]]["owner_id"]

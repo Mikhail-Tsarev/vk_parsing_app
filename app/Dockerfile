@@ -9,4 +9,4 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 EXPOSE 5000
 COPY . .
-CMD ["python", "-u", "run.py"]
+CMD ["python3", "run.py"]
