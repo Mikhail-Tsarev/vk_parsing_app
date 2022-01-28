@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
-from wtforms import SelectField, StringField, SubmitField
+from wtforms import BooleanField, SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired
 
 current_year = datetime.today().year
@@ -25,9 +25,21 @@ class QueryForm(FlaskForm):
     link = StringField(
         "Ссылка на профиль или группу", validators=[DataRequired()]
     )
-    day = SelectField("День", choices=[i for i in range(1, 31)])
+    day = SelectField("День", choices=[i for i in range(1, 32)])
     month = SelectField("Месяц", choices=months)
     year = SelectField(
         "Год", choices=[i for i in range(current_year, 2005, -1)]
     )
-    submit = SubmitField("Отправить")
+    id = BooleanField("Id записи", default=True)
+    text = BooleanField("Текст", default=True)
+    attachments = BooleanField("Количество вложений", default=True)
+    links = BooleanField("Ссылки на вложения", default=True)
+    likes = BooleanField("Количество лайков", default=True)
+    reposts = BooleanField("Количество репостов", default=True)
+    comments = BooleanField("Количество комментариев", default=True)
+    submit = SubmitField("Запросить")
+
+
+class GetCsv(FlaskForm):
+
+    submit = SubmitField("Скачать данные в .csv")

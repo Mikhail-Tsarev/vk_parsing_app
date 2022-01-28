@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="ru">
 <style type="text/css">
+   label, select {
+   display: inline !important
+   }
+   .button-success {
+        background: rgb(28, 184, 65);
+        }
    #block {
    border: 4px solid blue;
    margin: 50px;
-   width: 30%
+   max-width: 40%;
+   min-width: 400px
      }
+   #cb div {margin-top: 5px;
+   }
    #form{
    margin: 15px;
    }
-
+   .flash {padding: 10px; color: red; font-size: 18px;}
+.flash.success {
+         border: 1px solid #21DB56;
+         background: #AEFFC5;
+}
+.flash.error {
+         border: 1px solid #FF4343;
+         background: #FF9C9C;
+}
+#submit {
+border: none;
+background: #0078e7;
+}
+#submit:hover {
+background-image: -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(40%,rgba(0,0,0,.05)),to(rgba(0,0,0,.1)));
+    background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1)); }
 </style>
 <head>
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
@@ -19,17 +43,32 @@
 </head>
 <body>
 <div id="block">
+    {% for msg in get_flashed_messages() %}
+    <div class="flash">{{msg}}</div>
+    {% endfor %}
     <form class="pure-form pure-form-stacked" id="form" action="" method="post">
         {{ form.hidden_tag() }}
         <legend><h3>Введите ссылку на группу или сообщество:</h3></legend>
         <div class="pure-u-1">{{ form.link.label()}} {{form.link()}}</div>
+
         <hr>
         <legend>Укажите дату, начиная с которой требуется получить данные:</legend>
-        <div class="pure-u-1">{{ form.day.label() }} {{form.day()}}</div>
-        <div class="pure-u-1">{{ form.month.label()}} {{form.month()}}</div>
-        <div class="pure-u-1">{{ form.year.label()}} {{form.year()}}</div>
+        <div class="pure-u-1">{{form.day()}} {{ form.day.label() }}</div>
+        <div class="pure-u-1">{{form.month()}} {{ form.month.label()}}</div>
+        <div class="pure-u-1">{{form.year()}} {{ form.year.label()}}</div>
         <hr>
-        <div class="pure-button pure-button-primary">{{form.submit()}}</div>
+        <legend>Укажите какие данные требется получить:</legend>
+        <div id="cb">
+        <div >{{ form.id() }} {{ form.id.label() }}</div>
+        <div >{{ form.text() }} {{ form.text.label() }}</div>
+        <div >{{ form.attachments() }} {{ form.attachments.label() }}</div>
+        <div >{{ form.links() }} {{ form.links.label() }} </div>
+        <div >{{ form.likes() }} {{ form.likes.label() }}</div>
+        <div >{{ form.reposts() }} {{ form.reposts.label() }}</div>
+        <div >{{ form.comments() }} {{ form.comments.label() }}</div>
+        </div>
+        <hr>
+        <div class="pure-button pure-button-primary">{{ form.submit() }}</div>
     </form>
 </div>
 </body>
