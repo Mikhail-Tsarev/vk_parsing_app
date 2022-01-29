@@ -22,6 +22,13 @@ cd vk_parsing_app
 ```
 
 ## Настройка
+Для работы приложения требуется Python 3.7 или выше.
+Не забудьте установить все пакеты из [app/requirements.txt](app/requirements.txt).
+
+```bash
+pip install -r ./app/requirements.txt
+```
+
 Вставьте свой VK API access_token в файл [app/.env](app/.env).
 Требуется access_token пользователя с возможностью offline доступа.
 Как получить VK API access_token можно прочитать здесь [документация VK](https://dev.vk.com/api/access-token/getting-started)
